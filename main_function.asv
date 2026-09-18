@@ -22,24 +22,24 @@ theta = linspace(mu, 90, 1000);
 
 % Function of Theta
 
-f_theta1 = shock_residual(delta1, theta, M1);
+f_theta1 = residual(delta1, theta, M1);
 
-f_theta2 = shock_residual(delta2, theta, M1);
+f_theta2 = residual(delta2, theta, M1);
 
-f_theta3 = shock_residual(delta3, theta, M1);
+f_theta3 = residual(delta3, theta, M1);
 
-f_theta4 = shock_residual(delta4, theta, M1);
+f_theta4 = residual(delta4, theta, M1);
 
 
 % Plots
 
 plot(theta,f_theta1, 'r', 'LineWidth', 2)
 
-plot(theta,f_theta2, 'b', 'LineWidth', 2)
+plot(theta,f_theta2, 'LineWidth', 2, b)
 
-plot(theta,f_theta3, 'g', 'LineWidth', 2)
+plot(theta,f_theta3, 'LineWidth', 2, g)
 
-plot(theta,f_theta4, 'y', 'LineWidth', 2)
+plot(theta,f_theta4, 'LineWidth', 2, y)
 
 grid on;
 
