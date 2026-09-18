@@ -1,5 +1,6 @@
 function residual = shock_residual(delta, theta, M)
 
+% Inital Conditions
 gamma = 1.4;
 
 numerator = M^2 * sind(2*theta) - 2*cotd(theta);
