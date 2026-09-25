@@ -39,6 +39,8 @@ x0_2 = Root_Finding_Secant_(f_theta2, 0, [30, 50], 0.0001, 100);
 % f_func3 = @(theta) shock_residual(delta3, th, M1);
 % f_func4 = @(theta) shock_residual(delta4, th, M1);
 
+
+
 % Plots
 
 plot(theta,f_theta1, 'r', 'LineWidth', 2)
