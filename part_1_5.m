@@ -1,4 +1,3 @@
-clc;
 clear;
 close all;
 
@@ -31,8 +30,8 @@ f_func = @(theta) shock_residual(delta, theta, M1);
 % Plots
 
 x0 = incremental_search(f_func, @x , [0 100], .1, 100);
-plot(x0, 0, 'ro', 'MarkerFaceColor','auto')
-text(x0, 0, '  Root', 'VerticalAlignment', 'top')
+plot(x0, 0, 'ro', 'MarkerFaceColor','auto', 'Marker','o')
+text(x0, 0, sprintf('x = %g*', x0), 'VerticalAlignment', 'top')
 
 plot(theta, f_theta, 'r', 'LineWidth', 2)
 
