@@ -41,8 +41,8 @@ text(x0, 0, sprintf('x = %g*', x0), 'VerticalAlignment', 'top')
 text(x1, 0, sprintf('x = %g*', x1), 'VerticalAlignment', 'bottom')
 
 x1 = Root_Finding_Secant_(f_func, f_func_prime , [30 50], .1, 100);
-x2 = bisection(f_func, f_func_prime , [30 50], .1, 100);
-x3 = newton_raphson(f_func, f_func_prime , [30 50], .1, 100);
+x2 = bisection(f_func, f_func_prime , [0 100], .1, 100);
+x3 = newton_raphson(f_func, f_func_prime , [0 100], .1, 100);
 
 plot(x0, 0, 'ro', 'MarkerFaceColor','auto')
 text(x0, 0, 'Incrimental', 'VerticalAlignment', 'top')
