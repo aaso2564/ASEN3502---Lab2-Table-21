@@ -1,7 +1,7 @@
 function [xr, info] = secant(f, fprime, interval, atol, maxit)
     % Initialize x0 and x1 from interval
-    x0 = interval(1);
-    x1 = interval(2);
+    x0 = interval(1); % xr_old
+    x1 = interval(2); % xr
     
     % Default output info assuming non-convergence
     info = struct('flag', -1, 'iter', maxit, 'fval', f(x1));
