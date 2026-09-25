@@ -12,7 +12,8 @@
 
 % TODO: add a call for each of your other solvers
 test_root_find(@incremental_search)
-
+test_root_find(@newton_raphson)
+test_root_find(@bisection)
 test_root_find(@Root_Finding_Secant_)
 
 disp('All root finders verified.')
