@@ -1,47 +1,31 @@
 function [xr, info] = secant(f, fprime, interval, atol, maxit)
+    % Initialize x0 and x1 from interval
+    x0 = interval(1);
+    x1 = interval(2);
     
-    info = struct();
-    info.flag = -1;
-    
-    % Extract initial points
-    xprev = interval(1);
-    xr = interval(2);
-    
-    % Initial function evaluations
-    fxprev = f(xprev);
-    fxr = f(xr);
+    % Default output info assuming non-convergence
+    info = struct('flag', -1, 'iter', maxit, 'fval', f(x1));
     
     for i = 1:maxit
-        diff_f = fxr - fxprev;
+        f0 = f(x0);
+        f1 = f(x1);
         
-        % Prevent division by zero
-        if diff_f == 0
-            info.flag = -2; % Derivative approximation is zero
-            info.iter = i - 1;
-            info.fval = fxr;
-            return;
-        end
+        % Secant formula
+        x2 = x1 - f1 * (x1 - x0) / (f1 - f0);
         
-        % Secant step calculation
-        step = (fxr * (xr - xprev)) / diff_f;
-        xnew = xr - step;
-        
-        % Check convergence using absolute step size
-        if abs(xnew - xr) < atol
-            xr = xnew;
+        % Check if step size is within absolute tolerance
+        if abs(x2 - x1) < atol
+            xr = x2;
             info.flag = 0; % Success
             info.iter = i;
             info.fval = f(xr);
             return;
         end
         
-        % Update state for next iteration
-        xprev = xr;
-        fxprev = fxr;
-        xr = xnew;
-        fxr = f(xr);
+        % Advance variables for next step
+        x0 = x1;
+        x1 = x2;
     end
     
-    info.iter = maxit;
-    info.fval = fxr;
+    xr = x1;
 end
