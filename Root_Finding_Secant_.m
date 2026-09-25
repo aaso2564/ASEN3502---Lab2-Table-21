@@ -1,11 +1,13 @@
 function [xr, info] = secant(f, fprime, interval, atol, maxit)
     % Initialize x0 and x1 from interval
-    x0 = interval(1); % xr_old
-    x1 = interval(2); % xr
+    x0 = interval(1); % xr
+    x1 = interval(2); % xr_old
     
-    % Default output info assuming non-convergence
+    % Default output info storing into Termination Status, Iteration Count,
+    % and Function Value
     info = struct('flag', -1, 'iter', maxit, 'fval', f(x1));
     
+    % Begin Evaluating at the two points, F0 and F1
     for i = 1:maxit
         f0 = f(x0);
         f1 = f(x1);
