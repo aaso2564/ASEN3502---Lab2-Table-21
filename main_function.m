@@ -30,16 +30,6 @@ f_theta3 = shock_residual(delta3, theta, M1);
 
 f_theta4 = shock_residual(delta4, theta, M1);
 
-% Find root using Secant Method
-f_func2 = @(theta) shock_residual(delta2, th, M1);
-x0_2 = Root_Finding_Secant_(f_theta2, 0, [30, 50], 0.0001, 100);
-
-% Find roots for the remaining deflection angles if need be
-% f_func1 = @(theta) shock_residual(delta1, th, M1);
-% f_func3 = @(theta) shock_residual(delta3, th, M1);
-% f_func4 = @(theta) shock_residual(delta4, th, M1);
-
-
 
 % Plots
 
@@ -59,11 +49,6 @@ ylabel('Function Angle, Residual')
 
 title('Shock Angle over Theta')
 
-% Mark the zero on the plot
-plot(x0_2, 0, 'ro', 'MarkerFaceColor', 'k');
-
-text(x0_2, 0, sprintf('  x0 = %.2f°', x0_2), 'VerticalAlignment', 'bottom')
-
-legend('10°', '20°', '30°', '40°', 'Root for 20 Degrees');
+legend('10°', '20°', '30°', '40°');
 
 hold off;
