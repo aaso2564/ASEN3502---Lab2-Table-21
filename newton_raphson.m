@@ -1,10 +1,7 @@
 function [x, info] = newton_raphson(f, fprime, interval, atol, maxit)
     % Set initial guess to the midpoint of interval
-    if length(interval) == 1
-        xr = interval; 
-    else
+
         xr = (interval(1) + interval(2)) / 2; 
-    end
     
     info = struct();
     info.flag = -1;
