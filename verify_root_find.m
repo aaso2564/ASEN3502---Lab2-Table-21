@@ -6,9 +6,14 @@
 % Call the test once for each solver your team implemented, e.g.
 % test_root_find(@bisection). The @ makes a handle to the function so it can
 % be passed as an argument.
-test_root_find(@bisection)
-test_root_find(@newton_raphson)
+
+%test_root_find(@bisection)
+%test_root_find(@newton_raphson)
+
 % TODO: add a call for each of your other solvers
+test_root_find(@incremental_search)
+
+
 
 disp('All root finders verified.')
 
@@ -16,9 +21,9 @@ disp('All root finders verified.')
 % this script.
 function test_root_find(solver)
     % Choose a test function whose root you know exactly.
-    f = @(x) 0;             % TODO
-    fprime = @(x) 0;        % TODO
-    interval = [0 0];       % TODO
+    f = @(x) x^2 - 1;             % TODO
+    fprime = @(x) 2*x;        % TODO
+    interval = [0 3];       % TODO
     atol = 1e-6;
     maxit = 100;
 
@@ -26,8 +31,9 @@ function test_root_find(solver)
     x = solver(f, fprime, interval, atol, maxit);
 
     % TODO: compute the error between x and the true root, and use assert
+  
     % to raise an error if it is larger than atol. func2str(solver) gives
     % the solver's name for the error message.
-    error_in_x = 0;
+    error_in_x = abs(x - 1); %root = 1
     assert(error_in_x <= atol, '%s failed', func2str(solver))
 end
