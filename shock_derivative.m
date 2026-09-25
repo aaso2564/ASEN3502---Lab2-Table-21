@@ -2,7 +2,7 @@ function [shockDerivative] = shock_derivative(delta, theta, M)
     
     mu = asind(1/M);
 
-    theta = mu:0.5:theta;
+    theta = mu:0.5:90;
     
     N = ((M^2).*sind(2.*theta)) - (2.*cotd(theta));
     D = 2 + (M^2).*(1.4 + cosd(2.*theta));
