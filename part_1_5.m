@@ -30,8 +30,14 @@ f_func = @(theta) shock_residual(delta, theta, M1);
 % Plots
 
 x0 = incremental_search(f_func, @x , [0 100], .1, 100);
+x1 = incremental_search(f_func, @x , [x0+1, 100], .1, 100);
+
 plot(x0, 0, 'ro', 'MarkerFaceColor','auto', 'Marker','o')
+plot(x1, 0, 'ro', 'MarkerFaceColor','auto', 'Marker','o')
+
 text(x0, 0, sprintf('x = %g*', x0), 'VerticalAlignment', 'top')
+text(x1, 0, sprintf('x = %g*', x1), 'VerticalAlignment', 'bottom')
+
 x1 = Root_Finding_Secant_(f_func, @x , [30 50], .1, 100);
 
 plot(x0, 0, 'ro', 'MarkerFaceColor','auto')
