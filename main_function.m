@@ -30,7 +30,7 @@ f_theta3 = shock_residual(delta3, theta, M1);
 
 f_theta4 = shock_residual(delta4, theta, M1);
 
-% Find root using a function handle and a valid initial guess
+% Find root using Secant Method
 f_func2 = @(theta) shock_residual(delta2, th, M1);
 x0_2 = Root_Finding_Secant_(f_theta2, 0, [30, 50], 0.0001, 100);
 
