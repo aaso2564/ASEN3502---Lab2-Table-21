@@ -1,4 +1,4 @@
-function [x, info] = incremental_search(f, fprime, interval, atol, maxit); %Aarons function
+function [x, info] = incremental_search(f, fprime, interval, atol, maxit) %Aarons function
 
 arguments
     f function_handle
@@ -8,11 +8,11 @@ arguments
     maxit (1, 1) double {mustBeInteger, mustBePositive}
 end
 
-for i = 0:interval
-    x = interval(1) + i * (interval(2) - interval(1)) / maxit;
-    if abs(f(x)) <= atol || abs(fprime(x)) <= atol
+
+for i = (interval(1):atol:interval(2))
+    x = i + atol;
+    if f(i) * f(x) <= 0 
         info = struct("iterations", i, "converged", true);
         return
     end
-
 end

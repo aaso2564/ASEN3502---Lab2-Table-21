@@ -32,8 +32,11 @@ f_theta4 = shock_residual(delta4, theta, M1);
 
 
 % Plots
+x0 = fzero(f_theta1,1);
 
 plot(theta,f_theta1, 'r', 'LineWidth', 2)
+
+text(x0, 0, '  Zero', 'VerticalAlignment', 'bottom')
 
 plot(theta,f_theta2, 'b', 'LineWidth', 2)
 
@@ -50,5 +53,6 @@ ylabel('Function Angle, Residual')
 title('Shock Angle over Theta')
 
 legend('10°', '20°', '30°', '40°');
+
 
 hold off;

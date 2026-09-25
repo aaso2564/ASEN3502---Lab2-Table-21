@@ -13,6 +13,7 @@ function [xr, info] = secant(f, fprime, interval, atol, maxit)
         % Secant formula
         x2 = x1 - f1 * (x1 - x0) / (f1 - f0);
         
+        
         % Check if step size is within absolute tolerance
         if abs(x2 - x1) < atol
             xr = x2;
