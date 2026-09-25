@@ -21,8 +21,8 @@ disp('All root finders verified.')
 % this script.
 function test_root_find(solver)
     % Choose a test function whose root you know exactly.
-    f = @(x) x^2 - 1;             % TODO
-    fprime = @(x) 2*x;        % TODO
+    f = @(x) x^3 - 1;             % TODO
+    fprime = @(x) 3*x^2;        % TODO
     interval = [0 3];       % TODO
     atol = 1e-6;
     maxit = 100;

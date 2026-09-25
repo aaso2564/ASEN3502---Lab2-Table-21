@@ -31,6 +31,8 @@ f_theta3 = shock_residual(delta3, theta, M1);
 f_theta4 = shock_residual(delta4, theta, M1);
 
 
+
+
 % Plots
 x0 = fzero(f_theta1,1);
 
