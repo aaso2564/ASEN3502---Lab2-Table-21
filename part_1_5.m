@@ -31,10 +31,12 @@ f_func = @(theta) shock_residual(delta, theta, M1);
 % Plots
 
 x0 = incremental_search(f_func, @x , [0 100], .1, 100);
-x1 = Root_Finding_Secant_(f_func, @x , [0 100], .1, 100);
+x1 = Root_Finding_Secant_(f_func, @x , [30 50], .1, 100);
 
 plot(x0, 0, 'ro', 'MarkerFaceColor','auto')
-text(x0, 0, '  Root', 'VerticalAlignment', 'top')
+text(x0, 0, '  Root1', 'VerticalAlignment', 'top')
+plot(x1, 0, 'ro', 'MarkerFaceColor','auto')
+text(x1, 0, '  Root2', 'VerticalAlignment', 'top')
 
 plot(theta, f_theta, 'r', 'LineWidth', 2)
 
@@ -42,13 +44,13 @@ plot(theta, f_theta, 'r', 'LineWidth', 2)
 
 grid on;
 
-xlabel('Shock Angle in Degrees')
+xlabel('Shock Angle for 20 Degrees')
 
 ylabel('Function Angle, Residual')
 
 title('Shock Angle over Theta')
 
-legend('10°', '20°', '30°', '40°');
+legend('Incremental', 'Secant');
 
 
 hold off;
