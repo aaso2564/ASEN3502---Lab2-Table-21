@@ -22,17 +22,6 @@ function [x, info] = newton_raphson(f, fprime, interval, atol, maxit)
         
         func_evals = func_evals + 2;
         
-        % Safeguard against zero derivative or NaNs
-        if dfx == 0 || isnan(dfx) || isnan(fx)
-            info.flag = -2;
-            info.iter = i - 1;
-            info.fval = fx;
-            info.history.funcCount = info.history.funcCount(1:max(1, i-1));
-            info.history.x = info.history.x(1:max(1, i-1));
-            x = xr;
-            return;
-        end
-        
         xr_new = xr - (fx / dfx);
         xr_new = xr_new(1);
         
