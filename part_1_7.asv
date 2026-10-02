@@ -1,54 +1,60 @@
-clc;
-clear;
-close all;
+% Task 1.7 Initial Guess Dependence Script
 
-% Mach number and angle parameters
-M1 = 3.0;
+% Define Mach number and angle parameters
+M = 3.0;
 gamma = 1.4;
-mu = asind(1/M1);
+mu = asind(1/M);
 
-% Deflection angles
+% Theta Intervals
+
+theta = linspace(mu, 90, 1000);
+
+
 delta1 = 10;
 delta2 = 20;
 delta3 = 30;
 delta4 = 40;
 
-% Shock residual function handles
+% Function of Theta
+
 f_theta1 = @(theta) shock_residual(delta1, theta, M1);
+
 f_theta2 = @(theta) shock_residual(delta2, theta, M1);
+
 f_theta3 = @(theta) shock_residual(delta3, theta, M1);
+
 f_theta4 = @(theta) shock_residual(delta4, theta, M1);
 
-% Select target deflection angle function (delta1 = 10 deg)
+% Selecting just 1 f funciton
 f = f_theta1;
 
-% Numerical derivative fprime handle
+% Find F prime
 h = 1e-6;
 fprime = @(theta) (f(theta + h) - f(theta - h)) / (2 * h);
 
-% Solver settings
+% 3. Set solver tolerances
 atol = 1e-8;
 maxit = 100;
 
-% Reference weak and strong roots found using interval inputs
-[x_weak_ref, ~]   = newton_raphson(f, fprime, [mu, 45], atol, maxit);
-[x_strong_ref, ~] = newton_raphson(f, fprime, [45, 90], atol, maxit);
-tol_root = 1e-2;
-
-% Initial guess sweep across theta0
+% Sweep range for initial guess theta0
 theta0_vec = linspace(mu, 90, 500);
 convergence_status = strings(length(theta0_vec), 1);
 converged_roots = zeros(length(theta0_vec), 1);
 
+% Identify weak and strong roots independently
+[x_weak_ref, ~]   = newton_raphson(f, fprime, [mu, 45], atol, maxit);
+[x_strong_ref, ~] = newton_raphson(f, fprime, [45, 90], atol, maxit);
+
+tol_root = 1e-2; % Absolute tolerance to identify root match
+
 for k = 1:length(theta0_vec)
     x0 = theta0_vec(k);
     
-    % Pass scalar initial guess x0 directly into newton_raphson
-    [x_conv, info] = newton_raphson(f, fprime, x0, atol, maxit);
+    % Modified custom NR call with explicit x0
+    [x_conv, info] = newton_raphson_custom_x0(f, fprime, x0, atol, maxit);
     
     converged_roots(k) = x_conv;
     
-    % Categorize root result
     if info.flag ~= 0
         convergence_status(k) = "Failed";
     elseif abs(x_conv - x_weak_ref) < tol_root
@@ -69,5 +75,5 @@ scatter(theta0_vec(convergence_status == "Failed"), zeros(sum(convergence_status
 grid on;
 xlabel('Initial Guess \theta_0 (degrees)');
 ylabel('Converged Root (degrees)');
-title('Newton-Raphson Convergence vs. Initial Guess \theta_0 (\delta = 10^\circ)');
+title('Newton-Raphson Convergence vs. Initial Guess \theta_0');
 legend('Location', 'best');

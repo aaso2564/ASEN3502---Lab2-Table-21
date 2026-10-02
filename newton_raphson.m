@@ -1,7 +1,10 @@
-function [x, info] = newton_raphson(f, fprime, interval, atol, maxit)
-    % Set initial guess to the midpoint of interval
-
-        xr = (interval(1) + interval(2)) / 2; 
+function [x, info] = newton_raphson(f, fprime, init_val, atol, maxit)
+    % Accept either a 2-element interval [a, b] OR a scalar initial guess x0
+    if numel(init_val) == 1
+        xr = init_val;
+    else
+        xr = (init_val(1) + init_val(2)) / 2;
+    end
     
     info = struct();
     info.flag = -1;
@@ -14,32 +17,28 @@ function [x, info] = newton_raphson(f, fprime, interval, atol, maxit)
         fx = f(xr);
         dfx = fprime(xr);
         
-        % Ensure fx and dfx are strictly scalars
         fx = fx(1);
         dfx = dfx(1);
         
         func_evals = func_evals + 2;
         
-        % Safeguard against zero derivative
-        if dfx == 0
+        % Safeguard against zero derivative or NaNs
+        if dfx == 0 || isnan(dfx) || isnan(fx)
             info.flag = -2;
             info.iter = i - 1;
             info.fval = fx;
-            info.history.funcCount = info.history.funcCount(1:i-1);
-            info.history.x = info.history.x(1:i-1);
+            info.history.funcCount = info.history.funcCount(1:max(1, i-1));
+            info.history.x = info.history.x(1:max(1, i-1));
             x = xr;
             return;
         end
         
-        % Calculate new estimate as a scalar
         xr_new = xr - (fx / dfx);
-        xr_new = xr_new(1); % Enforce scalar output
+        xr_new = xr_new(1);
         
-        % Store history
         info.history.funcCount(i) = func_evals;
         info.history.x(i) = xr_new;
         
-        % Check absolute step convergence
         if abs(xr_new - xr) < atol
             x = xr_new;
             info.flag = 0;
