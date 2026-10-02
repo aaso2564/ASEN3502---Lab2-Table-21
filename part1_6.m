@@ -43,7 +43,7 @@ x = info.history.funcCount;
 y = abs(info.history.x - true);
 semilogx(x,y,'g', 'LineWidth', 2);
 
-[~, info] = newton_raphson(f_func, f_func_prime , [mu, 45], .000001, 1000000);
+[~, info] = newton_raphson(f_func, f_func_prime , [mu, 60], .000001, 1000000);
 x = info.history.funcCount;
 y = abs(info.history.x - true);
 semilogx(x,y,'b', 'LineWidth', 2);
