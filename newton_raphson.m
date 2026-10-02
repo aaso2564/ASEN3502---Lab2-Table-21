@@ -1,10 +1,6 @@
 function [x, info] = newton_raphson(f, fprime, interval, atol, maxit)
-    % Accept either a 2-element interval [a, b] OR a scalar initial guess x0
-    if numel(interval) == 1
-        xr = interval;
-    else
-        xr = (interval(1) + interval(2)) / 2;
-    end
+
+    xr = (interval(1) + interval(2)) / 2;
     
     info = struct();
     info.flag = -1;
