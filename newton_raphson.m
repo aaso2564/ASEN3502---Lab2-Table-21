@@ -19,6 +19,7 @@ function [x, info] = newton_raphson(f, fprime, interval, atol, maxit)
         
         info.history.funcCount(i) = func_evals;
         info.history.x(i) = xr_new;
+
         
         if abs(xr_new - xr) < atol
             x = xr_new;
