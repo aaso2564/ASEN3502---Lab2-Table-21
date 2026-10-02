@@ -1,5 +1,9 @@
 function [x, info] = newton_raphson(f, fprime, interval, atol, maxit)
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 2cc846ac0717a399e02ad04270de271369979d34
     xr = (interval(1) + interval(2)) / 2;
     
     info = struct();
