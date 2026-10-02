@@ -36,24 +36,24 @@ maxit = 100;
 tol_root = 1e-2;
 
 % Initial guess sweep across theta0
-theta0_vec = linspace(mu, 90, 500);
-convergence_status = strings(length(theta0_vec), 1);
-converged_roots = zeros(length(theta0_vec), 1);
+theta0_vector = linspace(mu, 90, 500);
+convergence_status = strings(length(theta0_vector), 1);
+converged_roots = zeros(length(theta0_vector), 1);
 
-for k = 1:length(theta0_vec)
+for k = 1:length(theta0_vector)
     x0 = theta0_vec(k);
     
     % Pass scalar initial guess x0 directly into newton_raphson
-    [x_conv, info] = newton_raphson(f, fprime, x0, atol, maxit);
+    [x_converge, info] = newton_raphson(f, fprime, x0, atol, maxit);
     
-    converged_roots(k) = x_conv;
+    converged_roots(k) = x_converge;
     
     % Categorize root result
     if info.flag ~= 0
         convergence_status(k) = "Failed";
-    elseif abs(x_conv - x_weak_ref) < tol_root
+    elseif abs(x_converge - x_weak_ref) < tol_root
         convergence_status(k) = "Weak Root";
-    elseif abs(x_conv - x_strong_ref) < tol_root
+    elseif abs(x_converge - x_strong_ref) < tol_root
         convergence_status(k) = "Strong Root";
     else
         convergence_status(k) = "Failed";
@@ -62,9 +62,9 @@ end
 
 % Plotting results
 figure('Name', 'Newton-Raphson Initial Guess Dependence');
-scatter(theta0_vec(convergence_status == "Weak Root"), converged_roots(convergence_status == "Weak Root"), 20, 'blue', 'filled', 'DisplayName', 'Converged to Weak Root'); hold on;
-scatter(theta0_vec(convergence_status == "Strong Root"), converged_roots(convergence_status == "Strong Root"), 20, 'red', 'filled', 'DisplayName', 'Converged to Strong Root');
-scatter(theta0_vec(convergence_status == "Failed"), zeros(sum(convergence_status == "Failed"), 1), 20, 'yellow', 'x', 'DisplayName', 'Failed');
+scatter(theta0_vector(convergence_status == "Weak Root"), converged_roots(convergence_status == "Weak Root"), 20, 'blue', 'filled', 'DisplayName', 'Converged to Weak Root'); hold on;
+scatter(theta0_vector(convergence_status == "Strong Root"), converged_roots(convergence_status == "Strong Root"), 20, 'red', 'filled', 'DisplayName', 'Converged to Strong Root');
+scatter(theta0_vector(convergence_status == "Failed"), zeros(sum(convergence_status == "Failed"), 1), 20, 'yellow', 'x', 'DisplayName', 'Failed');
 
 grid on;
 xlabel('Initial Guess theta_0 (degrees)');
