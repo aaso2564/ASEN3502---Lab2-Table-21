@@ -1,7 +1,7 @@
-function [x, info] = incremental_search(f, ~, interval, atol, maxit)
+function [x, info] = incremental_search(f, fprime, interval, atol, maxit)
     arguments
         f function_handle
-        ~
+        fprime
         interval (1, 2) double
         atol (1, 1) double {mustBePositive}
         maxit (1, 1) double {mustBeInteger, mustBePositive}

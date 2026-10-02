@@ -1,9 +1,9 @@
-function [x, info] = newton_raphson(f, fprime, init_val, atol, maxit)
+function [x, info] = newton_raphson(f, fprime, interval, atol, maxit)
     % Accept either a 2-element interval [a, b] OR a scalar initial guess x0
-    if numel(init_val) == 1
-        xr = init_val;
+    if numel(interval) == 1
+        xr = interval;
     else
-        xr = (init_val(1) + init_val(2)) / 2;
+        xr = (interval(1) + interval(2)) / 2;
     end
     
     info = struct();
