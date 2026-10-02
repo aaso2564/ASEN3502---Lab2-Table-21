@@ -1,44 +1,32 @@
-clc;
-clear;
-close all;
+% VERIFY_DERIVATIVE (Task 1.2)
+clear; clc;
 
-% Initial Condition
+M = 3;
+delta = deg2rad(20);                     % Wedge angle in radians
+theta_vals = deg2rad([25, 45, 65, 80]); % Test shock angles in radians
+h = 1e-6;                                % Step size for finite difference
+atol = 1e-4;                             % Tolerance for derivative agreement
 
-M = 3.0;
-gamma = 1.4;
-mu = asind(1/M);
+% Anonymous function handles (inputs must be in radians)
+f = @(theta) shock_residual(delta, theta, M);
+df_exact = @(theta) shock_derivative(delta, theta, M);
 
-% Step size for finite difference
-h = 1e-7;
-
-% Test values for delta and theta (degrees converted to radians)
-delta_test_deg = [10, 20, 30];
-theta_test_deg = [25, 45, 65, 80];
-
-fprintf('%-12s %-12s %-18s %-18s %-15s\n', 'delta (deg)', 'theta (deg)', 'Analytical', 'Finite Diff', 'Abs Error');
-fprintf('%s\n', repmat('-', 1, 78));
-
-for d_deg = delta_test_deg
-    delta = deg2rad(d_deg);
-    for t_deg = theta_test_deg
-        theta = deg2rad(t_deg);
-        
-        if theta <= mu
-            continue; % Ensure theta is above Mach angle
-        end
-        
-        % Analytical derivative
-        df_exact = shock_derivative(delta, theta, M);
-        
-        % Finite difference derivative
-        f_curr = shock_residual(delta, theta, M);
-        f_plus = shock_residual(delta, theta + h, M);
-        df_fd   = (f_plus - f_curr) / h;
-        
-        % Absolute error
-        err = abs(df_exact - df_fd);
-        
-        fprintf('%-12.1f %-12.1f %-18.10f %-18.10f %-15.4e\n', ...
-            d_deg, t_deg, df_exact, df_fd, err);
-    end
+for theta = theta_vals
+    % Analytical derivative
+    df_analytical = df_exact(theta);
+    
+    % Central finite difference approximation
+    df_fd = (f(theta + h) - f(theta - h)) / (2 * h);
+    
+    % Absolute error
+    err = abs(df_analytical - df_fd);
+    
+    % Print values for debugging
+    fprintf('theta = %5.1f deg | Analytical: %10.6f | Finite Diff: %10.6f | Err: %e\n', ...
+        rad2deg(theta), df_analytical, df_fd, err);
+    
+    % Assert tolerance
+    assert(err <= atol, 'Derivative failed at theta = %.2f deg', rad2deg(theta));
 end
+
+disp('Shock derivative verified successfully.')
