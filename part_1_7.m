@@ -13,11 +13,12 @@ delta2 = 20;
 delta3 = 30;
 delta4 = 40;
 
+% Theta Intervals
+
+theta = linspace(mu, 90, 1000);
+
 % Shock residual function handles
 f_theta1 = @(theta) shock_residual(delta1, theta, M1);
-f_theta2 = @(theta) shock_residual(delta2, theta, M1);
-f_theta3 = @(theta) shock_residual(delta3, theta, M1);
-f_theta4 = @(theta) shock_residual(delta4, theta, M1);
 
 % Select target deflection angle function (delta1 = 10 deg)
 f = f_theta1;
@@ -31,8 +32,8 @@ atol = 1e-8;
 maxit = 100;
 
 % Reference weak and strong roots found using interval inputs
-[x_weak_ref, ~]   = newton_raphson(f, fprime, [mu, 45], atol, maxit);
-[x_strong_ref, ~] = newton_raphson(f, fprime, [45, 90], atol, maxit);
+[x_weak_ref, ~]   = newton_raphson(f, fprime, [0, 60], atol, maxit);
+[x_strong_ref, ~] = newton_raphson(f, fprime, [60, 90], atol, maxit);
 tol_root = 1e-2;
 
 % Initial guess sweep across theta0
@@ -60,14 +61,32 @@ for k = 1:length(theta0_vector)
     end
 end
 
-% Plotting results
-figure('Name', 'Newton-Raphson Initial Guess Dependence');
-scatter(theta0_vector(convergence_status == "Weak Root"), converged_roots(convergence_status == "Weak Root"), 20, 'blue', 'filled', 'DisplayName', 'Converged to Weak Root'); hold on;
-scatter(theta0_vector(convergence_status == "Strong Root"), converged_roots(convergence_status == "Strong Root"), 20, 'red', 'filled', 'DisplayName', 'Converged to Strong Root');
-scatter(theta0_vector(convergence_status == "Failed"), zeros(sum(convergence_status == "Failed"), 1), 20, 'yellow', 'x', 'DisplayName', 'Failed');
+% 1.7 Plot
+fig = figure('Name', 'Newton-Raphson Initial Guess Dependence');
+ax = axes('Parent', fig);
+hold(ax, 'on'); grid(ax, 'on'); box(ax, 'on');
 
-grid on;
-xlabel('Initial Guess theta_0 (degrees)');
-ylabel('Converged Root (degrees)');
-title('Newton-Raphson Convergence vs. Initial Guess theta_0');
-legend('Location', 'best');
+% Logical indexing masks
+idx_weak   = (convergence_status == "Weak Root");
+idx_strong = (convergence_status == "Strong Root");
+idx_failed = (convergence_status == "Failed");
+
+% Reference root horizontal lines
+yline(x_weak_ref, '--', 'Weak Shock Root (\theta_{weak})', 'Color', 'red');
+yline(x_strong_ref, '--', 'Strong Shock Root (\theta_{strong})', 'Color', 'blue', 'LabelHorizontalAlignment', 'left');
+
+% Scatter convergence results
+scatter(theta0_vector(idx_weak), converged_roots(idx_weak), 25, 'red', 'filled', 'DisplayName', 'Converged to Weak Root');
+scatter(theta0_vector(idx_strong), converged_roots(idx_strong), 25, 'blue', 'filled', 'DisplayName', 'Converged to Strong Root');
+
+if any(idx_failed)
+    scatter(theta0_vector(idx_failed), zeros(sum(idx_failed), 1), 35, 'yellow', 'x', 'LineWidth', 1.5, 'DisplayName', 'Diverged / Exceeded Max Iterations');
+end
+
+% Axes labels and title
+xlabel('Initial Guess \theta_0 (degrees)', 'FontSize', 11, 'FontWeight', 'bold');
+ylabel('Converged Root \theta (degrees)', 'FontSize', 11, 'FontWeight', 'bold');
+title('Newton-Raphson Convergence vs. Initial Guess \theta_0 (M_1 = 3.0, \delta = 10^\circ)', 'FontSize', 12);
+xlim([mu, 90]);
+ylim([-5, 95]);
+legend('Location', 'southwest', 'FontSize', 9);
