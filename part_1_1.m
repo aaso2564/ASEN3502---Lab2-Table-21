@@ -32,19 +32,32 @@ f_theta4 = @(theta) shock_residual(delta4, theta, M1);
 
 
 % Plots
-weak1 = fzero(f_theta1,1);
-weak2 = fzero(f_theta2,1);
-weak3 = fzero(f_theta3,1);
-weak4 = fzero(f_theta4,1);
+weak1 = fzero(f_theta1,mu+1);
+weak2 = fzero(f_theta2,mu+1);
+weak3 = fzero(f_theta3,40);
 
-strong1 = fzero(f_theta1,weak1+1);
-strong2 = fzero(f_theta2,weak2+1);
-strong3 = fzero(f_theta3,weak3+1);
-strong4 = fzero(f_theta4,weak4+1);
+strong1 = fzero(f_theta1,80);
+strong2 = fzero(f_theta2,80);
+strong3 = fzero(f_theta3,80);
 
 plot(theta, f_theta1(theta), 'r', 'LineWidth', 2)
 
-text(x0, 0, '  Zero', 'VerticalAlignment', 'bottom')
+plot(weak1,0,'ro','MarkerEdgeColor','red','MarkerFaceColor','red','MarkerSize',8);
+plot(weak2,0,'ro','MarkerEdgeColor','blue','MarkerFaceColor','blue','MarkerSize',8);
+plot(weak3,0,'ro','MarkerEdgeColor','green','MarkerFaceColor','green','MarkerSize',8);
+
+plot(strong1,0,'ro','MarkerEdgeColor','red','MarkerFaceColor','red','MarkerSize',8);
+plot(strong2,0,'ro','MarkerEdgeColor','blue','MarkerFaceColor','blue','MarkerSize',8);
+plot(strong3,0,'ro','MarkerEdgeColor','green','MarkerFaceColor','green','MarkerSize',8);
+
+text(strong1+0.05,0+0.05, sprintf('%.2f', strong1),'Color','red');
+text(strong2-1,0.05, sprintf('%.2f', strong2),'Color','blue');
+text(strong3+0.05,0+0.05, sprintf('%.2f', strong3),'Color','green');
+
+text(weak1-2,0+0.05, sprintf('%.2f', weak1),'Color','red');
+text(weak2-2,0+0.05, sprintf('%.2f', weak2),'Color','blue');
+text(weak3-2,0+0.05, sprintf('%.2f', weak3),'Color','green');
+
 
 plot(theta,f_theta2(theta), 'b', 'LineWidth', 2)
 
