@@ -42,6 +42,12 @@ strong3 = fzero(f_theta3,80);
 
 plot(theta, f_theta1(theta), 'r', 'LineWidth', 2)
 
+plot(theta,f_theta2(theta), 'b', 'LineWidth', 2)
+
+plot(theta,f_theta3(theta), 'g', 'LineWidth', 2)
+
+plot(theta,f_theta4(theta), 'y', 'LineWidth', 2)
+
 plot(weak1,0,'ro','MarkerEdgeColor','red','MarkerFaceColor','red','MarkerSize',8);
 plot(weak2,0,'ro','MarkerEdgeColor','blue','MarkerFaceColor','blue','MarkerSize',8);
 plot(weak3,0,'ro','MarkerEdgeColor','green','MarkerFaceColor','green','MarkerSize',8);
@@ -59,11 +65,6 @@ text(weak2-2,0+0.05, sprintf('%.2f', weak2),'Color','blue');
 text(weak3-2,0+0.05, sprintf('%.2f', weak3),'Color','green');
 
 
-plot(theta,f_theta2(theta), 'b', 'LineWidth', 2)
-
-plot(theta,f_theta3(theta), 'g', 'LineWidth', 2)
-
-plot(theta,f_theta4(theta), 'y', 'LineWidth', 2)
 
 grid on;
 

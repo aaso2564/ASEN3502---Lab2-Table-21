@@ -10,9 +10,6 @@ delta = 20;
 
 mu = asind(1/M1);
 
-figure;
-hold on;
-
 % Theta Intervals
 
 theta = linspace(mu, 90, 1000);
@@ -28,47 +25,18 @@ f_func_prime = @(theta) shock_derivative(delta, theta, M1);
 
 
 
+weak = incremental_search(f_func, f_func_prime , [mu 45], .000001, 1000000);
+strong = incremental_search(f_func, f_func_prime , [weak+1, 90], .000001, 1000000);
+fprintf('Incremental search: \n weak = %.3f\n strong = %.3f\n\n', weak, strong);
 
-% Plots
+weak = bisection(f_func, f_func_prime , [mu 45], .000001, 1000000);
+strong = bisection(f_func, f_func_prime , [weak+10, 90], .000001, 1000000);
+fprintf('Bisection: \n weak = %.3f\n strong = %.3f\n\n', weak, strong);
 
-x0 = incremental_search(f_func, f_func_prime , [0 100], .1, 100);
-x1 = incremental_search(f_func, f_func_prime , [x0+1, 100], .1, 100);
+weak = newton_raphson(f_func, f_func_prime , [mu 45], .000001, 1000000);
+strong = newton_raphson(f_func, f_func_prime , [weak+10, 90], .000001, 1000000);
+fprintf('Newton_Raphson: \n weak = %.3f\n strong = %.3f\n\n', weak, strong);
 
-plot(x0, 0, 'ro', 'MarkerFaceColor','auto', 'Marker','o')
-plot(x1, 0, 'ro', 'MarkerFaceColor','auto', 'Marker','o')
-
-text(x0, 0, sprintf('x = %g*', x0), 'VerticalAlignment', 'top')
-text(x1, 0, sprintf('x = %g*', x1), 'VerticalAlignment', 'bottom')
-
-x1 = Root_Finding_Secant_(f_func, f_func_prime , [30 50], .1, 100);
-x2 = bisection(f_func, f_func_prime , [0 100], .1, 100);
-x3 = newton_raphson(f_func, f_func_prime , [0 100], .1, 100);
-
-plot(x0, 0, 'ro', 'MarkerFaceColor','auto')
-text(x0, 0, 'Incrimental', 'VerticalAlignment', 'top')
-
-plot(x1, 0, 'ro', 'MarkerFaceColor','auto')
-text(x1, 0, 'Secant', 'VerticalAlignment', 'top')
-
-plot(x2, 0, 'ro', 'MarkerFaceColor','auto')
-text(x2, 0, 'Bisection', 'VerticalAlignment', 'top')
-
-plot(x3, 0, 'ro', 'MarkerFaceColor','auto')
-text(x3, 0, 'Newton Raphson', 'VerticalAlignment', 'top')
-
-plot(theta, f_theta, 'r', 'LineWidth', 2)
-
-
-
-grid on;
-
-xlabel('Shock Angle for 20 Degrees')
-
-ylabel('Function Angle, Residual')
-
-title('Shock Angle over Theta')
-
-legend('Incremental', 'Secant', 'Bisection', 'Newton Raphson');
-
-
-hold off;
+weak = Root_Finding_Secant_(f_func, f_func_prime , [mu 45], .000001, 1000000);
+strong = Root_Finding_Secant_(f_func, f_func_prime , [weak+10, 90], .000001, 1000000);
+fprintf('Secant: \n weak = %.3f\n strong = %.3f\n\n', weak, strong);
