@@ -1,9 +1,5 @@
 function [x, info] = newton_raphson(f, fprime, interval, atol, maxit)
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 2cc846ac0717a399e02ad04270de271369979d34
     xr = (interval(1) + interval(2)) / 2;
     
     info = struct();
@@ -17,13 +13,9 @@ function [x, info] = newton_raphson(f, fprime, interval, atol, maxit)
         fx = f(xr);
         dfx = fprime(xr);
         
-        fx = fx(1);
-        dfx = dfx(1);
-        
         func_evals = func_evals + 2;
         
         xr_new = xr - (fx / dfx);
-        xr_new = xr_new(1);
         
         info.history.funcCount(i) = func_evals;
         info.history.x(i) = xr_new;
