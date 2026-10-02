@@ -64,7 +64,7 @@ end
 figure('Name', 'Newton-Raphson Initial Guess Dependence');
 scatter(theta0_vec(convergence_status == "Weak Root"), converged_roots(convergence_status == "Weak Root"), 20, 'blue', 'filled', 'DisplayName', 'Converged to Weak Root'); hold on;
 scatter(theta0_vec(convergence_status == "Strong Root"), converged_roots(convergence_status == "Strong Root"), 20, 'red', 'filled', 'DisplayName', 'Converged to Strong Root');
-scatter(theta0_vec(convergence_status == "Failed"), zeros(sum(convergence_status == "Failed"), 1), 20, 'black', 'x', 'DisplayName', 'Failed');
+scatter(theta0_vec(convergence_status == "Failed"), zeros(sum(convergence_status == "Failed"), 1), 20, 'yellow', 'x', 'DisplayName', 'Failed');
 
 grid on;
 xlabel('Initial Guess \theta_0 (degrees)');
