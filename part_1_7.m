@@ -41,7 +41,7 @@ convergence_status = strings(length(theta0_vector), 1);
 converged_roots = zeros(length(theta0_vector), 1);
 
 for k = 1:length(theta0_vector)
-    x0 = theta0_vec(k);
+    x0 = theta0_vector(k);
     
     % Pass scalar initial guess x0 directly into newton_raphson
     [x_converge, info] = newton_raphson(f, fprime, x0, atol, maxit);
