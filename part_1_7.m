@@ -67,7 +67,7 @@ scatter(theta0_vec(convergence_status == "Strong Root"), converged_roots(converg
 scatter(theta0_vec(convergence_status == "Failed"), zeros(sum(convergence_status == "Failed"), 1), 20, 'yellow', 'x', 'DisplayName', 'Failed');
 
 grid on;
-xlabel('Initial Guess \theta_0 (degrees)');
+xlabel('Initial Guess theta_0 (degrees)');
 ylabel('Converged Root (degrees)');
-title('Newton-Raphson Convergence vs. Initial Guess \theta_0 (\delta = 10^\circ)');
+title('Newton-Raphson Convergence vs. Initial Guess theta_0');
 legend('Location', 'best');
