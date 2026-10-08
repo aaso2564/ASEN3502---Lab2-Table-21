@@ -29,7 +29,7 @@ f_sys = @(x) shock_refraction_residual(x(1), x(2), x(3), M2, M3, delta_A, delta_
 % Jacobian handle evaluating at current state x
 J = @(x) numjac(f_sys, x, atol); 
 
-% Solve system using Newton's method
+% Solve system using Newton's System Method
 [x_sol, info] = newton_sys(f_sys, J, x0, 1e-6, 100);
 
 % Extract solutions
