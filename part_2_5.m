@@ -16,7 +16,7 @@ delta_B = deg2rad(30);
 % Equation 3: M_d ^ 2 * sin^2 (theta - gamma) = (gamma - 1)*M_u^2 * sin^2
 % (theta) + 2 / (2*gamma*M_u^2 * sin^2 (theta) - (gamma - 1))
 
-% Get Functions of theta
+% Get Functions of theta from week 1
 
 f_A = @(theta) shock_residual(deltaA, theta, M1);
 f_B = @(theta) shock_residual(deltaB, theta, M1);
