@@ -21,7 +21,7 @@ p2p1 = 5.0833;
 p3p1 = 5.0833;
 
 % Initial Guess 1 vector [phi; theta_C; theta_D] in radians
-x1 = [0; deg2rad(0); deg2rad(0)];
+x1 = [0; deg2rad(30); deg2rad(30)];
 
 % Initial Guess 2 vector [phi; theta_C; theta_D] in radians
 x2 = [5; deg2rad(15); deg2rad(15)];
@@ -35,9 +35,9 @@ f_sys2 = @(x2) shock_refraction_residual(x2(1), x2(2), x2(3), M2, M3, delta_A, d
 f_sys3 = @(x3) shock_refraction_residual(x3(1), x3(2), x3(3), M2, M3, delta_A, delta_B, p2p1, p3p1);
 
 % Jacobian handle evaluating at current state x
-J1 = @(x1) numjac(f_sys, x1, atol); 
-J2 = @(x2) numjac(f_sys, x2, atol); 
-J3 = @(x3) numjac(f_sys, x3, atol); 
+J1 = @(x1) numjac(f_sys1, x1, atol); 
+J2 = @(x2) numjac(f_sys2, x2, atol); 
+J3 = @(x3) numjac(f_sys3, x3, atol); 
 
 % Solve system using Newton's System Method
 [x_sol1, info1] = newton_sys(f_sys1, J1, x1, 1e-6, 100);
