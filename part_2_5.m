@@ -1,3 +1,15 @@
 clc;
 clear;
 close all;
+
+% Initial Conditions
+
+gamma = 1.4;
+M1 = 3.0;
+delta_A = deg2rad(15);
+delta_B = deg2rad(30);
+
+% Get Functions of theta
+
+f_A = @(theta) shock_residual(deltaA, theta, M1);
+f_B = @(theta) shock_residual(deltaB, theta, M1);
