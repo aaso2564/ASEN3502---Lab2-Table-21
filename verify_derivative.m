@@ -7,7 +7,7 @@ theta_vals = deg2rad([25, 45, 65, 80]); % Test shock angles in radians
 h = 1e-6;                                % Step size for finite difference
 atol = 1e-4;                             % Tolerance for derivative agreement
 
-% Anonymous function handles (inputs must be in radians)
+% Anonymous function handles
 f = @(theta) shock_residual(delta, theta, M);
 df_exact = @(theta) shock_derivative(delta, theta, M);
 
