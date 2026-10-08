@@ -7,7 +7,7 @@ close all;
 gamma = 1.4;
 M1 = 3.0;
 delta_A = deg2rad(15);
-delta_B = deg2rad(30);
+delta_B = deg2rad(10);
 
 % u = upstream
 % d = downstream
@@ -44,7 +44,7 @@ M1_A = M1 * sin(theta_A);
 
 % Pressure Continuity between 2 and 1 p2/p1
 
-p2p1 = 2*gamma*M1_A^2 * sin(theta_A)^2 - (gamma - 1) / (gamma + 1);
+p2p1 = (2*gamma*M1_A^2 * sin(theta_A)^2 - (gamma - 1)) / (gamma + 1);
 
 % M2 for normal shock at A
 % M_d = sqrt ((gamma - 1)*M_u^2 * sin^2
@@ -61,7 +61,7 @@ M2 = M2_A / sin(theta_A - delta_A);
 
 M1_B = M1*sin(theta_B);
 
-p3p1 = 2*gamma*M1_B^2 * sin(theta_B)^2 - (gamma - 1) / (gamma + 1);
+p3p1 = (2*gamma*M1_B^2 * sin(theta_B)^2 - (gamma - 1)) / (gamma + 1);
 
 M2_B = sqrt((((gamma - 1)*M1_B^2 * sin(theta_B)^2 + 2) / (2*gamma*M1_B^2 * sin(theta_B)^2 - (gamma - 1))) / (sin(theta_B - gamma)^2));
 
