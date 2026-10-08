@@ -17,17 +17,17 @@ delta4 = 40;
 
 theta = linspace(mu, 90, 1000);
 
-% Shock residual function handles
+% Shock residual
 f_theta1 = @(theta) shock_residual(delta1, theta, M1);
 
-% Select target deflection angle function (delta1 = 10 deg)
+% Select Angle for Function (delta1 = 10 deg)
 f = f_theta1;
 
-% Numerical derivative fprime handle
+% Derivative of f
 h = 1e-6;
 fprime = @(theta) (f(theta + h) - f(theta - h)) / (2 * h);
 
-% Solver settings
+% Conditions
 atol = 1e-8;
 maxit = 100;
 
@@ -44,7 +44,7 @@ converged_roots = zeros(length(theta0_vector), 1);
 for k = 1:length(theta0_vector)
     x0 = theta0_vector(k);
     
-    % Pass scalar initial guess x0 directly into newton_raphson
+    % Pass initial guess x0 directly into newton_raphson
     [x_converge, info] = newton_raphson(f, fprime, [x0,x0], atol, maxit);
     
     converged_roots(k) = x_converge;
@@ -61,7 +61,7 @@ for k = 1:length(theta0_vector)
     end
 end
 
-% 1.7 Plot
+% Plot
 fig = figure('Name', 'Newton-Raphson Initial Guess Dependence');
 ax = axes('Parent', fig);
 hold(ax, 'on'); grid(ax, 'on'); box(ax, 'on');
@@ -83,7 +83,7 @@ if any(idx_failed)
     scatter(theta0_vector(idx_failed), zeros(sum(idx_failed), 1), 35, 'yellow', 'x', 'LineWidth', 1.5, 'DisplayName', 'Diverged / Exceeded Max Iterations');
 end
 
-% Axes labels and title
+% Axes labels
 xlabel('Initial Guess \theta_0 (degrees)', 'FontSize', 11, 'FontWeight', 'bold');
 ylabel('Converged Root \theta (degrees)', 'FontSize', 11, 'FontWeight', 'bold');
 title('Newton-Raphson Convergence vs. Initial Guess \theta_0 (M_1 = 3.0, \delta = 10^\circ)', 'FontSize', 12);
