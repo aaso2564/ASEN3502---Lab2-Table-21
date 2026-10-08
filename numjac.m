@@ -1,12 +1,11 @@
 function [J] = numjac(f, x, h)
-
     n = length(x);
     J = zeros(n);
-    ident = eye(n);
-    fx = f(x); % Evaluate f(x) once outside the loop for efficiency
+    fx = f(x);
     
     for j = 1:n
-        ej = ident(:, j);
-        J(:, j) = (f(x + h*ej) - fx) / h;
+        x_pert = x;
+        x_pert(j) = x_pert(j) + h;
+        J(:, j) = (f(x_pert) - fx) / h;
     end
 end
