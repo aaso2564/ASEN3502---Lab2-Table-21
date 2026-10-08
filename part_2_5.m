@@ -44,7 +44,7 @@ M1_A = M1 * sin(theta_A);
 
 % Pressure Continuity between 2 and 1 p2/p1
 
-p2p1 = (2*gamma*M1_A^2 - (gamma-1))/(gamma+1);;
+p2p1 = (2*gamma*M1_A^2 - (gamma-1))/(gamma+1);
 
 % M2 for normal shock at A
 % M_d = sqrt ((gamma - 1)*M_u^2 * sin^2
