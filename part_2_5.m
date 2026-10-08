@@ -33,3 +33,12 @@ maxit = 100;
 % Find Weak Roots
 [theta_A, ~] = bisection(f_A, [], [mu, pi/4], atol, maxit);
 [theta_B, ~] = bisection(f_B, [], [mu, pi/4], atol, maxit);
+
+% Find Down Stream of A
+
+% M1 for normal shock 
+M1_A = M1 * sin(thetaA)
+
+% Pressure Continuity between 2 and 1
+
+p2p1 = 2*gamma* 
