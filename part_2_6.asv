@@ -10,18 +10,18 @@ close all
 
 % Initial Conditions
 delta_A = deg2rad(15);
-delta_B = deg2rad(30);
+delta_B = deg2rad(10);
 gamma = 1.4;
 atol = 1e-6;
 
 % Mach numbers and pressure ratios from step 2.5
-M2 = 2.4317;
-M3 = 4.6976;
-p2p1 = 6.1333;
-p3p1 = 6.1333;
+M2 = 1.1162;
+M3 = 0.9730;
+p2p1 = 5.0833;
+p3p1 = 2.4;
 
 % Initial Guess vector [phi; theta_C; theta_D] in radians
-x0 = [0; deg2rad(30); deg2rad(30)];
+x0 = [0; deg2rad(35); deg2rad(35)];
 
 % Function handle passing solver vector x = [phi; theta_C; theta_D]
 f_sys = @(x) shock_refraction_residual(x(1), x(2), x(3), M2, M3, delta_A, delta_B, p2p1, p3p1);
@@ -29,7 +29,7 @@ f_sys = @(x) shock_refraction_residual(x(1), x(2), x(3), M2, M3, delta_A, delta_
 % Jacobian handle evaluating at current state x
 J = @(x) numjac(f_sys, x, atol); 
 
-% Solve system using Newton's method
+% Solve system using Newton's System Method
 [x_sol, info] = newton_sys(f_sys, J, x0, 1e-6, 100);
 
 % Extract solutions
@@ -37,14 +37,14 @@ phi_deg = rad2deg(x_sol(1));
 theta_C_deg = rad2deg(x_sol(2));
 theta_D_deg = rad2deg(x_sol(3));
 
-% Calculate pressure ratios using radians x_sol(2)
-p4p2 = (2*gamma*M2^2 * sin(x_sol(2))^2 - (gamma - 1)) / (gamma + 1);
+% Calculate pressure ratios using x_sol(2)
+p4p2 = 1 + (2*gamma/(gamma+1))*(M2^2 * sin(x_sol(2))^2 - 1);
 p4p1 = p2p1 * p4p2;
 
-fprintf('phi:\t%.4f\n', phi_deg);
+fprintf('Phi:\t%.3f deg\n', phi_deg);
 
-fprintf('Theta C:\t%.4f\n', p3p1);
+fprintf('Theta C:\t%.3f deg\n', theta_C_deg);
 
-fprintf('M2:\t%.4f\n', M2);
+fprintf('Theta D:\t%.3f deg\n', theta_D_deg);
 
-fprintf('M3:\t%.4f\n', M3);
+fprintf('p4/p1:\t%.4f\n', p4p1);
