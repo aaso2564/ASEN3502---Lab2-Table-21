@@ -1,4 +1,3 @@
-
 %We are using the provided f matrix and x vector
 
 x1=rand*500;
