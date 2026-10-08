@@ -29,3 +29,7 @@ f_B = @(theta) shock_residual(deltaB, theta, M1);
 mu = asin(1/M1);
 atol = 1e-6;
 maxit = 100;
+
+% Find Weak Roots
+[theta_A, ~] = bisection(f_A, [], [mu, pi/4], atol, maxit);
+[theta_B, ~] = bisection(f_B, [], [mu, pi/4], atol, maxit);
