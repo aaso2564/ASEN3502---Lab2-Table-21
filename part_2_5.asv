@@ -14,7 +14,7 @@ delta_B = deg2rad(30);
 % Equaion 2: P_d / P_u = 2*gamma*M_u^2 * sin ^2 (theta) - (gamma - 1) / (gamma + 1)
 
 % Equation 3: M_d ^ 2 * sin^2 (theta - gamma) = (gamma - 1)*M_u^2 * sin^2
-% (theta) + 2 / (2*gamma*M_u^2 * sin^2 (theta) - (gamma - 1))
+% (theta) + 2 / (2*gamma*M_u^2 * sin^2 (theta) - (gamma 
 
 % Get Functions of theta
 
