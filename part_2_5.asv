@@ -27,3 +27,33 @@ f_B = @(theta) shock_residual(deltaB, theta, M1);
 
 % Conditions to Solve Weak Roots
 mu = asin(1/M1);
+atol = 1e-6;
+maxit = 100;
+
+% Find Weak Roots
+[theta_A, ~] = bisection(f_A, [], [mu, pi/4], atol, maxit);
+[theta_B, ~] = bisection(f_B, [], [mu, pi/4], atol, maxit);
+
+% Find Down Stream of A (M2)
+
+% M1 for normal shock at A
+M1_A = M1 * sin(thetaA)
+
+% Pressure Continuity between 2 and 1 p2/p1
+
+p2p1 = 2*gamma*M1_A^2 * sin(thetaA)^2 - (gamma - 1) / (gamma + 1)
+
+% M2 for normal shock at A
+M2_A = sqrt(((gamma-1)*M1_A^2 + 2) / (2*gamma*M1_A^2 - (gamma-1)))
+
+% Solve for M2 at A
+
+M2 = M2n / sin(thetaA - deltaA);
+
+% Find Up Stream for B (M3)
+
+M1_B = M1*sin(thetaB)
+
+p3p1 = 2*gamma*M1_B^2 * sin(thetaB)^2 - (gamma - 1) / (gamma + 1)
+
+M2_B = sqrt(((gamma-1)*M1_B^2 + 2) / (2*gamma*M1_B^2 - (gamma-1)))

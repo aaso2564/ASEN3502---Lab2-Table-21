@@ -18,8 +18,8 @@ delta_B = deg2rad(30);
 
 % Get Functions of theta from week 1
 
-f_A = @(theta) shock_residual(deltaA, theta, M1);
-f_B = @(theta) shock_residual(deltaB, theta, M1);
+f_A = @(theta) shock_residual(delta_A, theta, M1);
+f_B = @(theta) shock_residual(delta_B, theta, M1);
 
 % Get Weak roots for theta's because there is least resistance there,
 % oblique shocks in standard external aerodynamics point to the smaller, 
@@ -34,11 +34,33 @@ maxit = 100;
 [theta_A, ~] = bisection(f_A, [], [mu, pi/4], atol, maxit);
 [theta_B, ~] = bisection(f_B, [], [mu, pi/4], atol, maxit);
 
-% Find Down Stream of A
+% Find Down Stream of A (M2)
 
-% M1 for normal shock 
-M1_A = M1 * sin(thetaA)
+% M1 for normal shock at A
+M1_A = M1 * sin(theta_A)
 
-% Pressure Continuity between 2 and 1
+% Pressure Continuity between 2 and 1 p2/p1
 
-p2p1 = 2*gamma* 
+p2p1 = 2*gamma*M1_A^2 * sin(theta_A)^2 - (gamma - 1) / (gamma + 1)
+
+% M2 for normal shock at A
+% M_d = sqrt ((gamma - 1)*M_u^2 * sin^2
+% (theta) + 2 / (2*gamma*M_u^2 * sin^2 (theta) - (gamma - 1)) / sin^2
+% (theta - gamma))
+
+M2_A = sqrt((((gamma - 1)*M1_A^2 * sin(theta_A)^2 + 2) / (2*gamma*M1_A^2 * sin(theta_A)^2 - (gamma - 1))) / (sin(theta_A - gamma)^2))
+
+% Solve for M2 at A
+
+M2 = M2_A / sin(theta_A - delta_A)
+
+% Find down Stream for B (M3)
+
+M1_B = M1*sin(theta_B)
+
+p3p1 = 2*gamma*M1_B^2 * sin(theta_B)^2 - (gamma - 1) / (gamma + 1)
+
+M2_B = sqrt((((gamma - 1)*M1_B^2 * sin(theta_B)^2 + 2) / (2*gamma*M1_B^2 * sin(theta_B)^2 - (gamma - 1))) / (sin(theta_B - gamma)^2))
+
+M3 = M2_B / sin(theta_B - delta_B)
+
