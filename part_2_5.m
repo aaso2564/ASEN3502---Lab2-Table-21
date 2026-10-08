@@ -34,6 +34,9 @@ maxit = 100;
 [theta_A, ~] = bisection(f_A, [], [mu, pi/4], atol, maxit);
 [theta_B, ~] = bisection(f_B, [], [mu, pi/4], atol, maxit);
 
+fprintf('Theta A:\t%g rad\t(%.3f deg)\n', theta_A, rad2deg(theta_A));
+fprintf('Theta B:\t%g rad\t(%.3f deg)\n', theta_B, rad2deg(theta_B));
+
 % Find Down Stream of A (M2)
 
 % M1 for normal shock at A
@@ -64,3 +67,10 @@ M2_B = sqrt((((gamma - 1)*M1_B^2 * sin(theta_B)^2 + 2) / (2*gamma*M1_B^2 * sin(t
 
 M3 = M2_B / sin(theta_B - delta_B);
 
+fprintf('p2/p1:\t%.4f\n', p2p1);
+
+fprintf('p3/p1:\t%.4f\n', p3p1);
+
+fprintf('M2:\t%.4f\n', M2);
+
+fprintf('M3:\t%.4f\n', M3);
