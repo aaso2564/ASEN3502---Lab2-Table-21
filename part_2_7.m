@@ -43,3 +43,24 @@ J3 = @(x3) numjac(f_sys3, x3, atol);
 [x_sol1, info1] = newton_sys(f_sys1, J1, x1, 1e-6, 100);
 [x_sol2, info2] = newton_sys(f_sys2, J2, x2, 1e-6, 100);
 [x_sol3, info3] = newton_sys(f_sys3, J3, x3, 1e-6, 100);
+
+% Display Results for Initial Guess 1
+fprintf('Initial Guess 1: phi: 0 theta_C: 30 theta_D: 30 \n');
+fprintf('Phi: %.4f deg\n', rad2deg(x_sol1(1)));
+fprintf('Theta C: %.4f deg\n', rad2deg(x_sol1(2)));
+fprintf('Theta D: %.4f deg\n', rad2deg(x_sol1(3)));
+fprintf('Residual norm: %.6e\n', norm(f_sys1(x_sol1)));
+
+% Display Results for Initial Guess 2
+fprintf('Initial Guess 1: phi: 5 theta_C: 45 theta_D: 45 \n');
+fprintf('Phi: %.4f deg\n', rad2deg(x_sol2(1)));
+fprintf('Theta C: %.4f deg\n', rad2deg(x_sol2(2)));
+fprintf('Theta D: %.4f deg\n', rad2deg(x_sol2(3)));
+fprintf('Residual norm: %.6e\n', norm(f_sys2(x_sol2)));
+
+% Display Results for Initial Guess 3
+fprintf('Initial Guess 1: phi: -5 theta_C: 75 theta_D: 75 \n');
+fprintf('Phi: %.4f deg\n', rad2deg(x_sol3(1)));
+fprintf('Theta C: %.4f deg\n', rad2deg(x_sol3(2)));
+fprintf('Theta D: %.4f deg\n', rad2deg(x_sol3(3)));
+fprintf('Residual norm: %.6e\n', norm(f_sys3(x_sol3)));
