@@ -1,4 +1,4 @@
-% VERIFY_DERIVATIVE (Task 1.2)
+% VERIFY_DERIVATIVE
 clear; clc;
 
 M = 3;
