@@ -37,7 +37,7 @@ phi_deg = rad2deg(x_sol(1));
 theta_C_deg = rad2deg(x_sol(2));
 theta_D_deg = rad2deg(x_sol(3));
 
-% Calculate pressure ratios using radians x_sol(2)
+% Calculate pressure ratios using x_sol(2)
 p4p2 = 1 + (2*gamma/(gamma+1))*(M2^2 * sin(x_sol(2))^2 - 1);
 p4p1 = p2p1 * p4p2;
 
