@@ -10,14 +10,31 @@ close all
 
 % Initial Conditions
 
-M2 = 2.4317;
-M3 = 4.6976;
-
 delta_A = deg2rad(15);
 delta_B = deg2rad(30);
 
+gamma = 1.4;
 
+% From 2.5
 
+M2 = 2.4317;
+M3 = 4.6976;
+p2p1 = 6.1333;
+p3p1 = 6.1333;
+
+% Inital Guess to use newton_sys
+
+phi = 0;
+delta_C = 0;
+delta_D = 0;
+
+% Set up function for Newton System
+
+f_sys = @(x) shock_refraction_residual(phi, delta_C, delta_D, M2, M3, delta_A, delta_B, p2p1, p3p1);
+
+% Set up Jacobian
+
+J = 
 
 % Use Newton System to find phi, theta_C, theta_D, p4/pi
 
