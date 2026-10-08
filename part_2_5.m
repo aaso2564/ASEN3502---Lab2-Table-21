@@ -20,3 +20,12 @@ delta_B = deg2rad(30);
 
 f_A = @(theta) shock_residual(deltaA, theta, M1);
 f_B = @(theta) shock_residual(deltaB, theta, M1);
+
+% Get Weak roots for theta's because there is least resistance there,
+% oblique shocks in standard external aerodynamics point to the smaller, 
+% weak solution encountered in the real world.
+
+% Conditions to Solve Weak Roots
+mu = asin(1/M1);
+atol = 1e-6;
+maxit = 100;
