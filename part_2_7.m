@@ -24,10 +24,10 @@ p3p1 = 5.0833;
 x1 = [0; deg2rad(30); deg2rad(30)];
 
 % Initial Guess 2 vector [phi; theta_C; theta_D] in radians
-x2 = [5; deg2rad(15); deg2rad(15)];
+x2 = [5; deg2rad(45); deg2rad(45)];
 
 % Initial Guess 3 vector [phi; theta_C; theta_D] in radians
-x3 = [10; deg2rad(45); deg2rad(45)];
+x3 = [-5; deg2rad(75); deg2rad(75)];
 
 % Function handle passing solver vector x = [phi; theta_C; theta_D]
 f_sys1 = @(x1) shock_refraction_residual(x1(1), x1(2), x1(3), M2, M3, delta_A, delta_B, p2p1, p3p1);
