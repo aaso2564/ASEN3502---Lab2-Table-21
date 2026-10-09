@@ -15,10 +15,10 @@ gamma = 1.4;
 atol = 1e-6;
 
 % Mach numbers and pressure ratios from step 2.5
-M2 = 1.1162;
-M3 = 0.9730;
-p2p1 = 5.0833;
-p3p1 = 5.0833;
+M2 = 2.2549;
+M3 = 2.5050;
+p2p1 = 2.8216;
+p3p1 = 2.0545;
 
 % Initial Guess 1 vector [phi; theta_C; theta_D] in radians
 x1 = [0; deg2rad(30); deg2rad(30)];
