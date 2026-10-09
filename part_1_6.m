@@ -26,35 +26,49 @@ f_func_prime = @(theta) shock_derivative(delta, theta, M1);
 
 
 
+
 figure; 
 
 true = fzero(f_func, 20);
 
 [~, info] = incremental_search(f_func, f_func_prime , [mu 45], .000001, 1000000);
 x = (info.history.funcCount);
-y = abs(info.history.x - true);
+y = (abs(info.history.x - true));
 semilogx(x,y,'r', 'LineWidth', 2);
+
 
 hold on;
 
 
 [~, info] = bisection(f_func, f_func_prime , [mu, 45], .000001, 1000000);
 x = info.history.funcCount;
-y = abs(info.history.x - true);
+y = (abs(info.history.x - true));
 semilogx(x,y,'g', 'LineWidth', 2);
 
 [~, info] = newton_raphson(f_func, f_func_prime , [mu, 45], .000001, 1000000);
 x = info.history.funcCount;
-y = abs(info.history.x - true);
+y = (abs(info.history.x - true));
 semilogx(x,y,'b', 'LineWidth', 2);
 
-[~, info] = Root_Finding_Secant_(f_func, f_func_prime , [mu 45], .000001, 1000000);
+[~, info] = secant(f_func, f_func_prime , [mu 45], .000001, 1000000);
 x = info.history.funcCount;
-y = abs(info.history.x - true);
+y = (abs(info.history.x - true));
 semilogx(x,y,'y', 'LineWidth', 2);
 
+set(gca, 'YScale', 'log');
+
+ylim([1e-15 1e1]);
+
+yticks(10.^(-15:5:0));
+yticks([yticks, 10]);
+
+yticklabels({'10^{-15}', '10^{-10}', '10^{-5}', ...
+             '10^{0}', '10^{1}'});
+
+set(gca, 'TickLabelInterpreter', 'tex');
+
 grid on;
-legend('Increment', 'Bisection', 'Newton Raphson', 'Secant')
+legend('Increment', 'Bisection', 'Newton Raphson', 'Secant', 'Location', 'Southeast')
 title('Function Count vs Absolute Error for Each Method'); 
 xlabel('Function Count'); ylabel('|x - x_{true}|');
 
