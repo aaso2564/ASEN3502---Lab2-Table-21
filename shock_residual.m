@@ -6,6 +6,6 @@ gamma = 1.4;
 numerator = M^2 * sin(2*theta) - 2*cot(theta);
 denominator = 2+(M^2 * (gamma + cos(2*theta)));
     
-    residual = - tand(delta) + (numerator ./ denominator);
+    residual = - tan(delta) + (numerator ./ denominator);
 
 end
