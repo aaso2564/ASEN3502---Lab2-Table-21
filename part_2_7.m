@@ -24,10 +24,10 @@ p3p1 = 2.0545;
 x1 = [0; deg2rad(30); deg2rad(30)];
 
 % Initial Guess 2 vector [phi; theta_C; theta_D] in radians
-x2 = [0; deg2rad(45); deg2rad(45)];
+x2 = [0; deg2rad(60); deg2rad(60)];
 
 % Initial Guess 3 vector [phi; theta_C; theta_D] in radians
-x3 = [1; deg2rad(30); deg2rad(30)];
+x3 = [2; deg2rad(30); deg2rad(30)];
 
 % Function handle passing solver vector x = [phi; theta_C; theta_D]
 f_sys1 = @(x1) shock_refraction_residual(x1(1), x1(2), x1(3), M2, M3, delta_A, delta_B, p2p1, p3p1);
@@ -52,7 +52,7 @@ fprintf('Theta D: %.4f deg\n', rad2deg(x_sol1(3)));
 fprintf('Residual norm: %.6e\n', norm(f_sys1(x_sol1)));
 
 % Display Results for Initial Guess 2
-fprintf('Initial Guess 2: phi: 0 theta_C: 45 theta_D: 45 \n');
+fprintf('Initial Guess 2: phi: 0 theta_C: 60 theta_D: 60 \n');
 fprintf('Phi: %.4f deg\n', rad2deg(x_sol2(1)));
 fprintf('Theta C: %.4f deg\n', rad2deg(x_sol2(2)));
 fprintf('Theta D: %.4f deg\n', rad2deg(x_sol2(3)));
