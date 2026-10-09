@@ -3,9 +3,9 @@ function residual = shock_residual(delta, theta, M)
 % Inital Conditions
 gamma = 1.4;
 
-numerator = M^2 * sind(2*theta) - 2*cotd(theta);
-denominator = 2+(M^2 * (gamma + cosd(2*theta)));
+numerator = M^2 * sin(2*theta) - 2*cot(theta);
+denominator = 2+(M^2 * (gamma + cos(2*theta)));
     
-    residual = - tand(delta) + (numerator ./ denominator);
+    residual = - tan(delta) + (numerator ./ denominator);
 
 end
