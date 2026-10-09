@@ -52,14 +52,14 @@ fprintf('Theta D: %.4f deg\n', rad2deg(x_sol1(3)));
 fprintf('Residual norm: %.6e\n', norm(f_sys1(x_sol1)));
 
 % Display Results for Initial Guess 2
-fprintf('Initial Guess 1: phi: 5 theta_C: 45 theta_D: 45 \n');
+fprintf('Initial Guess 2: phi: 5 theta_C: 45 theta_D: 45 \n');
 fprintf('Phi: %.4f deg\n', rad2deg(x_sol2(1)));
 fprintf('Theta C: %.4f deg\n', rad2deg(x_sol2(2)));
 fprintf('Theta D: %.4f deg\n', rad2deg(x_sol2(3)));
 fprintf('Residual norm: %.6e\n', norm(f_sys2(x_sol2)));
 
 % Display Results for Initial Guess 3
-fprintf('Initial Guess 1: phi: -5 theta_C: 75 theta_D: 75 \n');
+fprintf('Initial Guess 3: phi: -5 theta_C: 75 theta_D: 75 \n');
 fprintf('Phi: %.4f deg\n', rad2deg(x_sol3(1)));
 fprintf('Theta C: %.4f deg\n', rad2deg(x_sol3(2)));
 fprintf('Theta D: %.4f deg\n', rad2deg(x_sol3(3)));
